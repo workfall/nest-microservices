@@ -1,4 +1,12 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
+import { AclServiceService } from './acl-service.service';
 
-@Controller('acl-service')
-export class AclServiceController {}
+@Controller('')
+export class AclServiceController {
+    constructor(private readonly aclService: AclServiceService) { }
+
+    @Get()
+    getAuth() {
+        return this.aclService.getAuth();
+    }
+}

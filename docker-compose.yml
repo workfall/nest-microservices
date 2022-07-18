@@ -1,0 +1,60 @@
+version: "3.3"
+
+networks:
+  app-tier:
+    driver: bridge
+
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - "8080:80"
+    container_name: nginx
+    networks:
+      - app-tier
+    depends_on:
+      - acl-service
+      - test-service
+    volumes:
+      - ./api-gateway/nginx.conf:/etc/nginx/conf.d/default.conf
+
+  acl-service:
+    build:
+      context: .
+      dockerfile: Dockerfile-Local
+    ports:
+      - "3001:3001"
+    container_name: acl-service
+    networks:
+      - app-tier
+    volumes:
+      - ./package.json:/usr/src/app/package.json
+      - ./tsconfig.json:/usr/src/app/tsconfig.json
+      - ./tsconfig.build.json:/usr/src/app/tsconfig.build.json
+      - ./src:/usr/src/app/src/
+    environment:
+      - PORT=3001
+      - RUN_TIME=dev
+      - MICROSERVICE_NAME=acl-service
+
+  test-service:
+    build:
+      context: .
+      dockerfile: Dockerfile-Local
+    ports:
+      - "3002:3002"
+    container_name: test-service
+    networks:
+      - app-tier
+    depends_on:
+      - acl-service
+    volumes:
+      - ./package.json:/usr/src/app/package.json
+      - ./tsconfig.json:/usr/src/app/tsconfig.json
+      - ./tsconfig.build.json:/usr/src/app/tsconfig.build.json
+      - ./src:/usr/src/app/src/
+    environment:
+      - PORT=3002
+      - RUN_TIME=dev
+      - MICROSERVICE_NAME=test-service
+  
