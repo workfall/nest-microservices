@@ -34,7 +34,7 @@ services:
       - ./src:/usr/src/app/src/
     environment:
       - PORT=3001
-      - RUN_TIME=dev
+      - RUN_TIME=prod
       - MICROSERVICE_NAME=acl-service
 
   test-service:
@@ -55,6 +55,6 @@ services:
       - ./src:/usr/src/app/src/
     environment:
       - PORT=3002
-      - RUN_TIME=dev
+      - RUN_TIME=prod
       - MICROSERVICE_NAME=test-service
   
