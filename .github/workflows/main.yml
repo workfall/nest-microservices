@@ -36,7 +36,7 @@ jobs:
       - name: Configure AWS credentials from Test account
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          role-to-assume: arn:aws:iam::837158764358:role/aws-elasticbeanstalk-service-role
+          role-to-assume: arn:aws:iam::837158764358:role/Github_actions_role
           aws-region: us-east-1
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
