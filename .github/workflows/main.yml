@@ -64,18 +64,18 @@ jobs:
       - name: Generate deployment package
         run: zip deploy.zip -r src dist package.json package-lock.json docker-compose.yml Dockerfile-Local tsconfig.json tsconfig.build api-gateway
 
-      - name: Configure AWS credentials from Test account
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          role-to-assume: arn:aws:iam::837158764358:role/Github_actions_role
-          aws-region: us-east-1
+      # - name: Configure AWS credentials from Test account
+      #   uses: aws-actions/configure-aws-credentials@v1
+      #   with:
+      #     role-to-assume: arn:aws:iam::837158764358:role/Github_actions_role
+      #     aws-region: us-east-1
 
       - name: Deploy to EB
         uses: einaregilsson/beanstalk-deploy@v20
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          # aws_session_token: ${{ secrets.AWS_SESSION_TOKEN }}
+          aws_session_token: ${{ secrets.AWS_SESSION_TOKEN }}
           application_name: nest-microservices
           environment_name: Nestmicroservices-env
           version_label: ${{ github.head_ref }}.${{ github.sha }}
