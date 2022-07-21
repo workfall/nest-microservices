@@ -40,8 +40,10 @@ jobs:
       - name: 'Upload Artifact'
         uses: actions/upload-artifact@v3
         with:
-          name: dist
-          path: dist
+          name: build-step-output
+          path: |
+            dist/
+            package-lock.json
           retention-days: 1
 
   deploy:
@@ -56,13 +58,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Download dist artifact
+      - name: Download build step artifacts
         uses: actions/download-artifact@v3
         with:
-          name: dist
+          name: build-step-output
 
       - name: Generate deployment package
-        run: zip deploy.zip -r src dist package.json package-lock.json docker-compose.yml Dockerfile-Local tsconfig.json tsconfig.build api-gateway
+        run: zip deploy.zip -r src dist package.json package-lock.json docker-compose.yml Dockerfile-Local tsconfig.json tsconfig.build.json api-gateway
 
       - name: Deploy to EB
         uses: einaregilsson/beanstalk-deploy@v20
