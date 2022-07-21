@@ -74,4 +74,5 @@ jobs:
           version_label: ${{ github.head_ref }}.${{ github.sha }}
           region: us-east-1
           deployment_package: deploy.zip
+          use_existing_version_if_available: true
 
