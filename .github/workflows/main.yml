@@ -73,7 +73,7 @@ jobs:
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           application_name: nest-microservice
           environment_name: Nestmicroservice-env
-          version_label: ${{ github.head_ref }}.${{ github.sha }}
+          version_label: nest-microservices2-source
           region: us-east-1
           deployment_package: deploy.zip
           use_existing_version_if_available: true
