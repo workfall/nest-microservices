@@ -5,11 +5,11 @@ networks:
     driver: bridge
 
 services:
-  nginx:
+  gateway:
     image: nginx:latest
     ports:
       - "80:80"
-    container_name: nginx
+    container_name: gateway
     networks:
       - app-tier
     depends_on:
