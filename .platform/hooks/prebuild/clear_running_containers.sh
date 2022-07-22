@@ -9,5 +9,5 @@ trap 'last_command=$current_command; current_command=$BASH_COMMAND' DEBUG
 trap 'echo "\"${last_command}\" command completed with exit code $?."' EXIT
 
 docker kill $(docker ps -q)
-docker rm $(docker ps -a -q)
-docker rmi $(docker images -q)
+docker rm -f $(docker ps -a -q)
+docker rmi -f $(docker images -q)
