@@ -72,7 +72,7 @@ jobs:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           application_name: nest-microservices2
-          environment_name: Nestmicroservices2-env
+          environment_name: Nestmicroservices2-env-1
           version_label: ${{ github.sha }}
           region: us-east-1
           deployment_package: deploy.zip
