@@ -22,7 +22,7 @@ const APPMODULE =
     : require(`../dist/microservices/${MICROSERVICE_NAME}`).AppModule;
 
 async function bootstrap() {
-  const app = await NestFactory.create(APPMODULE, {cors: true});
+  const app = await NestFactory.create(APPMODULE, { cors: true });
 
   await app.listen(PORT);
 

@@ -1,1 +1,1 @@
-export {HealthcheckServiceModule as AppModule} from './healthcheck-service.module';
+export { HealthcheckServiceModule as AppModule } from './healthcheck-service.module';
